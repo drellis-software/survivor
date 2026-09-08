@@ -1,0 +1,12 @@
+Backend Methods:
+
+Picks:
+    - Create a pick from json post
+        - Check for lives
+            - If yes, allow pick
+            - If no, deny pick
+        - Check for if team was already selected
+            - If yes, allow pick
+            - If no, deny pick
+    - Update pick from json post
+        -

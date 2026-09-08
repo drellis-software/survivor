@@ -1,0 +1,19 @@
+Endpoints needed for project:
+
+Users:
+    - Create a user
+    - Query a user
+    - Update a user
+    - Delete a user
+    - Pagenated list of all users
+
+Picks:
+    - Create a pick
+    - Update existing pick (Before Game x and y are played)
+    - Delete a pick (Admin)
+    - Query for existing teams picked for a certain user
+
+Standings:
+    - Query for all user lives
+
+

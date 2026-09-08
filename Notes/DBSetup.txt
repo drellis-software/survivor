@@ -1,0 +1,91 @@
+Leagues:
+    CREATE TABLE Leagues (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    Name NVARCHAR(100) NOT NULL
+);
+
+
+Users:
+    CREATE TABLE Users (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    Username NVARCHAR(50) NOT NULL UNIQUE,
+    HashedPassword NVARCHAR(MAX) NOT NULL,
+    FirstName NVARCHAR(50) NOT NULL,
+    LastName NVARCHAR(50) NOT NULL,
+    Email NVARCHAR(100) NOT NULL UNIQUE,
+    Role NVARCHAR(20) NOT NULL,
+    NumberOfEntries INT NOT NULL
+);
+
+UserLeague:
+    CREATE TABLE UserLeagues (
+    UserId INT,
+    LeagueId INT,
+    PRIMARY KEY (UserId, LeagueId),
+    FOREIGN KEY (UserId) REFERENCES Users(Id),
+    FOREIGN KEY (LeagueId) REFERENCES Leagues(Id)
+);
+
+Entry:
+    CREATE TABLE Entries (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    UserId INT,
+    LeagueId INT,
+    IsActive BIT DEFAULT 1,
+    FOREIGN KEY (UserId) REFERENCES Users(Id),
+    FOREIGN KEY (LeagueId) REFERENCES Leagues(Id)
+);
+
+EntryPick:
+    CREATE TABLE EntryPicks (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    EntryId INT,
+    TeamName NVARCHAR(100) NOT NULL,
+    UniquePickId NVARCHAR(100) NOT NULL UNIQUE,
+    Week INT NOT NULL,
+    FOREIGN KEY (EntryId) REFERENCES Entries(Id)
+);
+
+NFLTeams:
+    -- Create the NFLTeams table
+CREATE TABLE NFLTeams (
+    Id INT IDENTITY(1,1) PRIMARY KEY, -- Automatically incrementing primary key
+    TeamName NVARCHAR(100) NOT NULL UNIQUE, -- Team name with a unique constraint
+    Abbreviation NVARCHAR(10) NOT NULL UNIQUE -- Team abbreviation with a unique constraint
+);
+
+-- Insert the 32 NFL teams into the NFLTeams table
+INSERT INTO NFLTeams (TeamName, Abbreviation)
+VALUES
+    ('New England Patriots', 'NE'),
+    ('Miami Dolphins', 'MIA'),
+    ('Buffalo Bills', 'BUF'),
+    ('New York Jets', 'NYJ'),
+    ('Baltimore Ravens', 'BAL'),
+    ('Cincinnati Bengals', 'CIN'),
+    ('Pittsburgh Steelers', 'PIT'),
+    ('Cleveland Browns', 'CLE'),
+    ('Tennessee Titans', 'TEN'),
+    ('Indianapolis Colts', 'IND'),
+    ('Jacksonville Jaguars', 'JAC'),
+    ('Houston Texans', 'HOU'),
+    ('Kansas City Chiefs', 'KC'),
+    ('Los Angeles Chargers', 'LAC'),
+    ('Denver Broncos', 'DEN'),
+    ('Las Vegas Raiders', 'LV'),
+    ('San Francisco 49ers', 'SF'),
+    ('Seattle Seahawks', 'SEA'),
+    ('Los Angeles Rams', 'LAR'),
+    ('Arizona Cardinals', 'ARI'),
+    ('Dallas Cowboys', 'DAL'),
+    ('Philadelphia Eagles', 'PHI'),
+    ('Washington Commanders', 'WAS'),
+    ('New York Giants', 'NYG'),
+    ('Green Bay Packers', 'GB'),
+    ('Minnesota Vikings', 'MIN'),
+    ('Chicago Bears', 'CHI'),
+    ('Detroit Lions', 'DET'),
+    ('Atlanta Falcons', 'ATL'),
+    ('Carolina Panthers', 'CAR'),
+    ('New Orleans Saints', 'NO'),
+    ('Tampa Bay Buccaneers', 'TB');
